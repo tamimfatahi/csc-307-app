@@ -87,6 +87,10 @@ app.get('/users/:id', (req, res) => {
 
 app.post('/users', (req, res) => {
     const userToAdd = req.body;
+
+    let rand_id = (Math.random() + 1).toString(36).substring(7);
+    userToAdd['id'] = rand_id;
+    
     addUser(userToAdd);
     res.status(201).end();
 });
