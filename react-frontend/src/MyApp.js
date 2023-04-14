@@ -7,14 +7,25 @@ import axios from 'axios';
 function MyApp() {
   const [characters, setCharacters] = useState([]);
 
+  async function makeDeleteCall(id) {
+    try {
+       const response = await axios.delete('http://localhost:8000/users/' + id);  
+    }
+    catch (error) {
+       console.log(error);      
+    }
+  }
+
   function removeOneCharacter (index) {
     const updated = characters.filter((character, i) => {
         return i !== index
       });
+
+      makeDeleteCall(characters[index]['id']);
       setCharacters(updated);
     }
   
-  async function fetchAll(){
+  async function fetchAll() {
       try {
          const response = await axios.get('http://localhost:8000/users');
          return response.data.users_list;     
