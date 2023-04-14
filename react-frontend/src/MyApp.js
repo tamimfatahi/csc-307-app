@@ -9,8 +9,8 @@ function MyApp() {
 
   async function makeDeleteCall(id) {
     try {
-       const response = await axios.delete('http://localhost:8000/users/' + id);  
-       return true;
+       const response = await axios.delete('http://localhost:8000/users/' + id); 
+       return response;
     }
     catch (error) {
        console.log(error); 
@@ -23,11 +23,11 @@ function MyApp() {
         return i !== index
       });
 
-      let check = makeDeleteCall(characters[index]['id']);
-      if (check) {
-        setCharacters(updated);
-      }
-    }
+    makeDeleteCall(characters[index]['id']).then( result => {
+        if (result && result.status === 204) {
+           setCharacters(updated)
+        }});
+  }
   
   async function fetchAll() {
       try {
