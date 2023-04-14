@@ -13,10 +13,6 @@ function MyApp() {
       });
       setCharacters(updated);
     }
-
-  function updateList(person) {
-      setCharacters([...characters, person]);
-    }
   
   async function fetchAll(){
       try {
@@ -43,9 +39,9 @@ function MyApp() {
 
   function updateList(person) { 
     makePostCall(person).then( result => {
-    if (result && result.status === 201)
-       setCharacters([...characters, person] );
-    });
+    if (result && result.status === 201) {
+       setCharacters([...characters, result.data] )
+    }});
   }
 
   useEffect(() => {

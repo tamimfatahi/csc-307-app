@@ -92,7 +92,7 @@ app.post('/users', (req, res) => {
     userToAdd['id'] = rand_id;
     
     addUser(userToAdd);
-    res.status(201).end();
+    res.status(201).send(userToAdd).end();
 });
 
 function addUser(user) {
